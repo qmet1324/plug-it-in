@@ -8,14 +8,14 @@ using Random = UnityEngine.Random;
 
 public class RandomSpawnController : MonoBehaviour
 {
-    [SerializeField] private GameObject _prefab;
+    [SerializeField] private List<GameObject> _levels = new List<GameObject>();
     
-    void OnCollisionEnter2D(Collision2D collision)
+    void Start()
     {
-        Instantiate(_prefab, transform.position + new Vector3((Random.Range(-5.0f, 5.0f)), 
-                                                                                 0.0f, 
-                                                                                 0.0f), 
-                                                                                 transform.rotation);
-        Destroy(_prefab);
+        GameObject randomLevel = _levels[Random.Range(1, _levels.Count)];
+
+        Instantiate(randomLevel, gameObject.transform.position, Quaternion.identity);
+
+        Destroy(gameObject);
     }
 }
